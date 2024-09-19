@@ -5,6 +5,16 @@ function saveToStorage(){
     localStorage.setItem('cart', JSON.stringify(cart));
 }
 
+export function calcCartQuantity(){
+    let cartQuantity =0;
+
+    cart.forEach((item) => {
+        cartQuantity += item.quantity;
+  
+    });
+
+    return cartQuantity;
+}
 export function addToCart(productid,qty) {
 
     let match;
