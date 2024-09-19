@@ -45,7 +45,7 @@ products.forEach((product) => {
 
           <div class="product-spacer"></div>
 
-          <div class="added-to-cart">
+          <div class="added-to-cart js-added-to-cart-${product.id}">
             <img src="images/icons/checkmark.png">
             Added
           </div>
@@ -75,6 +75,7 @@ function updateCartQuan() {
 
 }
 
+const addedMessageTimeouts = {};
 
 document.querySelectorAll('.js-add-to-cart')
     .forEach((button) => {
@@ -82,11 +83,26 @@ document.querySelectorAll('.js-add-to-cart')
         button.addEventListener('click', () => {
         
             const productid = button.dataset.productId; //Convert to camel case above from kebab-case
+            //const {productId} = button.dataset; Shorthand property for the above
+
             let qty = document.querySelector(`.js-quantity-selector-${productid}`).value;
             qty = Number(qty);
             
             addToCart(productid,qty);
-            updateCartQuan();        
+
+            updateCartQuan();   
+            
+            const addedMessage= document.querySelector(`.js-added-to-cart-${productid}`);
+            addedMessage.classList.add('added-to-cart-visible');
+            
+            const previousTimeoutId = addedMessageTimeouts[productid];
+            if (previousTimeoutId) {
+              clearTimeout(previousTimeoutId);
+            }
+      
+            const timeoutId = setTimeout(() => { addedMessage.classList.remove('added-to-cart-visible')} , 2000);
+
+            addedMessageTimeouts[productid] = timeoutId;
            
     });
 });
