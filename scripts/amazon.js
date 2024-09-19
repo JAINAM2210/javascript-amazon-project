@@ -25,11 +25,11 @@ products.forEach((product) => {
           </div>
 
           <div class="product-price">
-           ${formatCurrency(product.priceCents)};
+           $${formatCurrency(product.priceCents)}
           </div>
 
-          <div class="product-quantity-container">
-            <select>
+          <div class="product-quantity-container ">
+            <select class="js-quantity-selector-${product.id}">
               <option selected value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
@@ -81,9 +81,11 @@ document.querySelectorAll('.js-add-to-cart')
 
         button.addEventListener('click', () => {
         
-            const productid= button.dataset.productId; //Convert to camel case above from kebab-case
-
-            addToCart(productid);
+            const productid = button.dataset.productId; //Convert to camel case above from kebab-case
+            let qty = document.querySelector(`.js-quantity-selector-${productid}`).value;
+            qty = Number(qty);
+            
+            addToCart(productid,qty);
             updateCartQuan();        
            
     });
