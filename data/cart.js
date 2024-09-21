@@ -30,7 +30,8 @@ export function addToCart(productid,qty) {
     else{
         cart.push({
             productId: productid,
-            quantity: qty
+            quantity: qty,
+            deliveryOptId: '1'
         });
   }
 
