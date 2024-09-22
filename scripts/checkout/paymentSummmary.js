@@ -5,11 +5,12 @@ import {formatCurrency } from '../utils/money.js';
 
 export function renderPaymentSummary(){
   
-    let totalProductCost=0,shippingCost=0;
+    let totalProductCost=0,shippingCost=0,totalQuantity=0;
     cart.forEach((cartItem) =>{
 
         const product= getProduct(cartItem.productId);
         totalProductCost+= product.priceCents * cartItem.quantity;
+        totalQuantity+=cartItem.quantity;
 
         const deliveryOption= getDeliveryOption(cartItem.deliveryOptId);
         shippingCost+=deliveryOption.priceCents;
@@ -29,7 +30,7 @@ export function renderPaymentSummary(){
           </div>
 
           <div class="payment-summary-row">
-            <div>Items (3):</div>
+            <div>Items (${totalQuantity}):</div>
             <div class="payment-summary-money">$${formatCurrency(totalProductCost)}</div>
           </div>
 

@@ -92,8 +92,7 @@ export function renderOrderPage() {
                             ${priceString} Shipping
                         </div>
                     </div>
-                </div>
-            `
+                </div>  `
         });
 
         return deliveryOptHTML;
