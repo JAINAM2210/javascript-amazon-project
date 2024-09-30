@@ -1,6 +1,10 @@
-import {products} from '../data/products.js';
+import {products, loadProducts} from '../data/products.js';
 import {addToCart, calcCartQuantity} from '../data/cart.js';
 
+loadProducts(renderProductsGrid);
+
+function renderProductsGrid(){
+  
 
 let productHTML = ``;
 
@@ -108,5 +112,5 @@ document.querySelectorAll('.js-add-to-cart')
            
     });
 });
-
+}
 
